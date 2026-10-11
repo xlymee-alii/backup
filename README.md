@@ -1,1 +1,66 @@
-# backup
+<html>
+    <head>
+        <title>Registration</title>
+        <style>
+            body{text-align:center; font-family:Times New Roman;}
+            input{margin:7px; padding:2px;}
+            #out{
+                width:300px; margin:15px auto; padding:10px;
+                border:1px solid; text-align:left;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Registration Form</h2>
+
+        <input id="n" placeholder="Name"><br>
+        <input id="e" placeholder="Email"><br>
+        <input id="u" placeholder="Username"><br>
+        <input id="p" type="password" placeholder="Password"><br>
+        <input id="c" type="password" placeholder="Confirm Password"><br>
+
+        <button onclick="reg()">Register</button>
+        <button onclick="clr()">Clear</button>
+
+        <div id="out"></div>
+
+        <script>
+            const inputs=document.querySelectorAll("input");
+
+            inputs.forEach((input, index) => {
+                input.addEventListener("keydown", function(e){
+                    if(e.key === "Enter"){
+                        e.preventDefault();
+                        const next = inputs[index + 1];
+                        if(next) next.focus();
+                        else reg();
+                    }
+                });
+            });
+
+            function reg(){
+                const n=document.getElementById("n").value;
+                const e=document.getElementById("e").value;
+                const u=document.getElementById("u").value;
+                const p=document.getElementById("p").value;
+                const c=document.getElementById("c").value;
+
+                if(p!==c){
+                    out.innerHTML="Passwords do not match";
+                    return;
+                }
+
+                out.innerHTML=
+                    "Name: &nbsp;&nbsp;&nbsp;"+n+"<br>"+
+                    "Email: &nbsp;&nbsp;&nbsp;"+e+"<br>"+
+                    "Username: "+u;
+            }
+
+            function clr(){
+                inputs.forEach(x => x.value="");
+                out.innerHTML="";
+                inputs[0].focus();
+            }
+        </script>
+    </body>
+</html>
